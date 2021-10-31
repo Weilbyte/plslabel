@@ -1,0 +1,12 @@
+name = "worker"
+type = "webpack"
+
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2021-10-19"
+
+kv_namespaces = [
+  { binding = "PREFS", id = "<ignored>", preview_id = "<ignored>" }
+]
