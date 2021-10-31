@@ -50,7 +50,17 @@ export default async function (payload) {
 
         if (done < user_labels.length) {
             for (let i = done; i < user_labels.length; i++) {
-                // TODO: ADD
+                await fetch(`https://api.github.com/repos/${payload.repository.full_name}/labels`, {
+                    headers: {
+                    'Authorization': `token ${token}`
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: user_labels[i].name,
+                        color: user_labels[i].color.replace('#', ''),
+                        description: user_labels[i].desc
+                    })
+                })
             }
         }
 
