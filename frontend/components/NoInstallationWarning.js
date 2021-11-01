@@ -19,7 +19,7 @@ export default function NoInstallationWarning(props) {
             <Box display='flex' padding='20px' borderWidth='1px' borderColor='severe.emphasis' borderStyle='solid' width='60%' borderRadius='6px' bg='severe.subtle' marginBottom='20px' marginTop='20px' color='fg.default' alignItems='center'>
                 GitHub App Installation not detected
                 <ButtonGroup marginLeft='auto'>
-                    <Link href={GITHUB_APP_INSTALL_PAGE}>
+                    <Link href={GITHUB_APP_INSTALL_PAGE} passHref>
                         <ButtonPrimary>Install</ButtonPrimary>
                     </Link>
                     <Button onClick={() => {
