@@ -9,26 +9,32 @@ export default async function (request) {
 
     if (cookies[COOKIE_NAME] != null) {
         let token = aes.decrypt(AES_KEY, cookies[COOKIE_NAME])
-        
-        const userJSON = await (await fetch(`https://api.github.com/user`, {
+
+        let userReq = await fetch(`https://api.github.com/user`, {
             method: 'GET',
             headers: {
-              accept: 'application/json',
-              Authorization: `token ${token}`,
+              accept: 'application/vnd.github.v3+json',
+              'User-Agent': 'plsLabel',
+              Authorization: `Bearer ${token}`,
             }
-        })).json()
+        })
+
+        let userJSON = JSON.parse(await userReq.text())
 
         if (!userJSON.login) {
             return new Response(JSON.stringify({ error: { message: userJSON.message, external: true } }), { status: 401, headers: HEADERS })
         }
 
-        const installationJSON = await (await fetch(`https://api.github.com/users/${userJSON.login}/installation`, {
+        let installationReq = await fetch(`https://api.github.com/users/${userJSON.login}/installation`, {
             method: 'GET',
             headers: {
-              accept: 'application/json',
+              accept: 'application/vnd.github.v3+json',
+              'User-Agent': 'plsLabel',
               Authorization: `Bearer ${await generateJWT()}`,
             }
-        })).json()
+        })
+
+        let installationJSON = JSON.parse(await installationReq.text())
 
         return new Response(JSON.stringify({
             isAuth: true,

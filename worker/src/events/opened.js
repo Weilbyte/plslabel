@@ -7,7 +7,8 @@ export default async function (payload) {
         if (automation.enabled) {     
             await fetch(`https://api.github.com/repos/${payload.repository.full_name}/issues/${payload.issue.number}/labels`, {
                     headers: {
-                        'Authorization': `token ${await generateIAT(payload.installation.id, payload.repository.id)}`
+                        'Authorization': `token ${await generateIAT(payload.installation.id, payload.repository.id)}`,
+                        'User-Agent': 'plsLabel'
                     },
                     method: 'POST',
                     body: JSON.stringify({

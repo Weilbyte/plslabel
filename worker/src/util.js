@@ -13,6 +13,7 @@ export async function generateIAT(installation_id, repository_id) {
         method: 'POST',
         headers: {
             Accept: 'application/vnd.github.v3+json',
+            'User-Agent': 'plsLabel',
             Authorization: `Bearer ${await generateJWT()}`
         },
         body: JSON.stringify({

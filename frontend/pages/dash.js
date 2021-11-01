@@ -11,14 +11,19 @@ import LabelSettings from '../components/LabelSettings'
 import AutomationSettings from '../components/AutomationSettings'
 import NoInstallationWarning from '../components/NoInstallationWarning'
 import TabMenu from '../components/TabMenu'
+import { isPropertySignature } from 'typescript'
 
 export default function Home() {
     const [hash, setHash] = useState('#account')
     const { currentUser, setCurrentUser } = useUser()
 
     function hashChange() {
-        if (['#account', '#labels', '#automation'].includes(window.location.hash)) {
-            setHash(window.location.hash)
+        if (currentUser && currentUser.installed) {
+            if (['#account', '#labels', '#automation'].includes(window.location.hash)) {
+                setHash(window.location.hash)
+            }
+        } else {
+            setHash('#account')
         }
     }
 
@@ -52,7 +57,7 @@ export default function Home() {
         <>  
             <Box display="flex" paddingTop='100px' paddingLeft='16px' maxWidth='1012px' marginLeft='auto' marginRight='auto' height='600px' flexDirection='column'>
                 <Box>
-                    <TabMenu hash={hash} />
+                    <TabMenu hash={hash} installed={currentUser.installed}/>
                 </Box>
                 <NoInstallationWarning show={!currentUser.installed}/>
                 <Box  borderRadius='6px' padding='5px' marginTop='30px' width='100%' height='300px' color='fg.muted'>

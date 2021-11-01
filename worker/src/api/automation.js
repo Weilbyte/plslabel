@@ -14,6 +14,7 @@ export default async function (request) {
             method: 'GET',
             headers: {
               accept: 'application/json',
+              'User-Agent': 'plsLabel',
               Authorization: `token ${token}`,
             }
         })).json()

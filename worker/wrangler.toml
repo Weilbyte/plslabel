@@ -1,12 +1,12 @@
-name = "worker"
+name = "plslabel"
 type = "webpack"
 
-account_id = ""
+account_id = "2485281ef2fe6395e0b91f37b92c7684"
 workers_dev = true
-route = ""
-zone_id = ""
+route = "plslabel.weilbyte.dev/worker/*"
+zone_id = "4847bc025db67155537d52a29bd5dbec"
 compatibility_date = "2021-10-19"
 
 kv_namespaces = [
-  { binding = "PREFS", id = "<ignored>", preview_id = "<ignored>" }
+  { binding = "PREFS", id = "184f1cba78b54a41b335390cc3bd4e9d", preview_id = "f4e1f9cbaa9e453e8a7612d2bcd2c254" }
 ]

@@ -15,6 +15,7 @@ export default async function (request) {
             method: 'GET',
             headers: {
               accept: 'application/json',
+              'User-Agent': 'plsLabel',
               Authorization: `token ${token}`,
             }
         })).json()
@@ -24,10 +25,6 @@ export default async function (request) {
         }
 
         const labels = await request.json() || {}
-
-        if (!Object.keys(labels).length) {
-            return new Response(JSON.stringify({ error: { message: 'Missing body' } }), { status: 400, headers: HEADERS })
-        }
 
         const [error, msg] = validateLabels(labels)
 
