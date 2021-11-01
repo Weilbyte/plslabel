@@ -16,6 +16,7 @@ export default async function (payload) {
     } else {
         const token = await generateIAT(payload.installation.id, payload.repository.id)
         const req = await fetch(`https://api.github.com/repos/${payload.repository.full_name}/labels`, { headers: {
+            'User-Agent': 'plsLabel',
             'Authorization': `token ${token}`
         }})
 
@@ -28,7 +29,8 @@ export default async function (payload) {
             if (user_labels[i]) {
                 await fetch(`https://api.github.com/repos/${payload.repository.full_name}/labels/${repo_labels[i].name}`, {
                     headers: {
-                    'Authorization': `token ${token}`
+                        'Authorization': `token ${token}`,
+                        'User-Agent': 'plsLabel'
                     },
                     method: 'PATCH',
                     body: JSON.stringify({
@@ -41,7 +43,8 @@ export default async function (payload) {
             } else {
                 await fetch(`https://api.github.com/repos/${payload.repository.full_name}/labels/${repo_labels[i].name}`, {
                     headers: {
-                    'Authorization': `token ${token}`
+                        'Authorization': `token ${token}`,
+                        'User-Agent': 'plsLabel'
                     },
                     method: 'DELETE'
                 }) 
@@ -52,7 +55,8 @@ export default async function (payload) {
             for (let i = done; i < user_labels.length; i++) {
                 await fetch(`https://api.github.com/repos/${payload.repository.full_name}/labels`, {
                     headers: {
-                    'Authorization': `token ${token}`
+                        'Authorization': `token ${token}`,
+                        'User-Agent': 'plsLabel'
                     },
                     method: 'POST',
                     body: JSON.stringify({

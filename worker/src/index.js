@@ -10,7 +10,10 @@ import { default as apiFlowComplete } from './api/flow/complete'
 import { default as apiFlowLogout } from './api/flow/logout'
 
 async function handleRequest(request) {
-  const path = new URL(request.url).pathname
+  let path = new URL(request.url).pathname
+  path = path.replace('/worker', '')
+
+  console.log(path)
 
   switch (path.split('?')[0]) { 
     case '/api/user': 
@@ -28,7 +31,6 @@ async function handleRequest(request) {
     case '/event':
       try {
         const payload = await request.json()
-        console.log(payload)
         const handler = require(`./events/${payload.action}`).default
         return await handler(payload)
       } catch (e) {

@@ -8,8 +8,6 @@ export default async function (request) {
         return new Response(JSON.stringify({error: { message: "Missing 'code' parameter"}}), { status: 400 })
     }
 
-    GITHUB_APP_CLIENT_SECRET
-
     const tokenJSON = await (await fetch(`https://github.com/login/oauth/access_token?client_id=${GITHUB_APP_CLIENT_ID}&client_secret=${GITHUB_APP_CLIENT_SECRET}&code=${code}`, {
         method: 'POST',
         headers: {
@@ -26,7 +24,7 @@ export default async function (request) {
     return new Response(null, {
         headers: {
             'Location': APP_PATH_ROOT,
-            'Set-Cookie': `${COOKIE_NAME}=${encrypted}; Max-Age=28800; Path=/api; SameSite=None; Secure; HttpOnly;`
+            'Set-Cookie': `${COOKIE_NAME}=${encrypted}; Max-Age=28800; Path=/worker; SameSite=None; Secure; HttpOnly;`
         },
         status: 302
     })
