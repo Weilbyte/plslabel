@@ -7,7 +7,7 @@ export default function AccountSettings(props) {
             
             <Box borderLeft='1px solid' borderLeftColor='fg.muted' paddingLeft='20px' height='165px' marginLeft='30px'>
                 <Text color='fg.default' fontWeight='bold' fontSize='16px'>Account name</Text><br/>
-                <a href={`https://github.com/${props.user.username}`} target='_blank'>{props.user.username}</a>
+                <a href={`https://github.com/${props.user.username}`} target='_blank' rel='noreferrer' >{props.user.username}</a>
 
                 <br/><br/>
 
