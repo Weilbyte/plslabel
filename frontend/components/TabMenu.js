@@ -10,12 +10,14 @@ export default function TabMenu(props) {
                 <UnderlineNav.Link href="#account" selected={props.hash === '#account'}>
                     <Text>Account</Text>
                 </UnderlineNav.Link>
-                <UnderlineNav.Link href="#labels" selected={props.hash === '#labels'}>
-                    <Text>Labels</Text>
-                </UnderlineNav.Link>
-                <UnderlineNav.Link href="#automation" selected={props.hash === '#automation'}>
-                    <Text>Automation</Text>
-                </UnderlineNav.Link>
+                {props.installed ? <>
+                    <UnderlineNav.Link href="#labels" selected={props.hash === '#labels'}>
+                        <Text>Labels</Text>
+                    </UnderlineNav.Link>
+                    <UnderlineNav.Link href="#automation" selected={props.hash === '#automation'}>
+                        <Text>Automation</Text>
+                    </UnderlineNav.Link>
+                </> : null}
             </UnderlineNav>
         </>    
     )
